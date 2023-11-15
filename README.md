@@ -1,6 +1,6 @@
 ﻿# ProyectoFinalArqui
 Inicio:	    
-	          MOV ACC, VAR_A      ;Vamos al ACC y almacenamos VAR_A que es diferente al registro A
+	    MOV ACC, VAR_A      ;Vamos al ACC y almacenamos VAR_A que es diferente al registro A
             MOV DPTR, ACC       ;Vamos al DPTR y almacenamos VAR_A
             MOV ACC, 0x00       ;Cargamos una constante
             MOV [DPTR], ACC     ;Vamos al VAR_A inicializada en 0000 0000
@@ -15,23 +15,23 @@ Inicializar_Q-1:
             MOV ACC, 0x00       ;Vamos al ACC y almacenamos 0000 0000
             MOV [DPTR], ACC     ;Vamos al Q-1 y almacenamos 0000 0000
  Calcular_Q0:         
-            MOV ACC, Q    	  	;Vamos al ACC y almacenamos Q
+            MOV ACC, Q    	;Vamos al ACC y almacenamos Q
             MOV DPTR, ACC       ;Vamos al DPTR y movemos Q
             MOV ACC, [DPTR]     ;Vamos al ACC y almacenamos el valor que contiene el apuntados
-		        MOV A, ACC		  	  ;Vamos al registro A y almacenamos el valor del acumulador
+	    MOV A, ACC		;Vamos al registro A y almacenamos el valor del acumulador
             MOV ACC, 0b00000001 ;Vamos al ACC y almacenamos el numero 0000 0001 
             AND ACC, A          ;Vamos al ACC y calculamos AND de 0000 0001 con el valor de Q
             MOV A, ACC          ;Vamos al A y almacenamos ACC              
 Guardar_Q0:
-            MOV ACC, Q0     	  ;Vamos al ACC y almacenamos Q0
+            MOV ACC, Q0     	 ;Vamos al ACC y almacenamos Q0
             MOV DPTR, ACC       ;Vamos al DPTR y almacenamos Q0
             MOV ACC, A          ;Vamos al ACC y almacenamos el valor del registro A
             MOV [DPTR], ACC     ;Vamos a Q0 y almacenamos el valor del acumulador
 Preguntar_Q-1=0: 
-		  	    MOV ACC, Q0		  	;Vamos al ACC y almacenamos Q0
-	      	  MOV DPTR, ACC	    ;Vamos al DPTR y almacenamos el valor que contiene el ACC
-	      	  MOV ACC, [DPTR]	 	;Vamos al ACC y almacenamos el valor que contiene el apuntador
-	        	MOV A, ACC		  	;Vamos al registro A y almacenamos el valor que contien el acumulador
+	    MOV ACC, Q0		  	;Vamos al ACC y almacenamos Q0
+	    MOV DPTR, ACC	    ;Vamos al DPTR y almacenamos el valor que contiene el ACC
+  	    MOV ACC, [DPTR]	 	;Vamos al ACC y almacenamos el valor que contiene el apuntador
+	    MOV A, ACC		  	;Vamos al registro A y almacenamos el valor que contien el acumulador
             MOV ACC, Q-1	    ;Vamos al ACC y almacenamos Q-1  
             MOV DPTR, ACC     ;Vamos al DPTR y almacenamos Q-1
             MOV ACC, [DPTR]   ;Vamos al ACC y almacenamos 0000 0000 
@@ -43,18 +43,18 @@ Preguntar_-1:
 Preguntar_0-:
             MOV ACC, A        ;Vamos al ACC y almacenamos el valor del registro A
             JZ DesplazarAritmetico ;Saltamos a la instruccion que desplaza por aritmetica
-	      	  MOV ACC, [DPTR]	  ;Vamos al ACC y almacenamos la dirección de memoria del DPTR
-	      	  JZ Hacer_10		  	;Saltamos a la instruccion que para hacer el caso 10
+	    MOV ACC, [DPTR]	  ;Vamos al ACC y almacenamos la dirección de memoria del DPTR
+	    JZ Hacer_10		  	;Saltamos a la instruccion que para hacer el caso 10
 Hacer_11:
             JMP DesplazarAritmetico ;Saltamos a la instruccion que desplaza por aritmetica
 Hacer_10:
             MOV ACC, M          ;Vamos a ACC y almacenamos M
             MOV DPTR, ACC       ;Vamos al DPTR y almacenamos M
             MOV ACC, [DPTR]     ;Vamos al ACC y se almacena el valor que contiene el apuntador
-	    	    INV ACC		      	  ;Invertimos M
-	    	    MOV A, ACC		  	  ;Movemos el acumulador al registro A
-	   	      MOV ACC, 0b00000001 ;Cargamos una constante 1
-	   	      ADD ACC, A		  	  ;Hacemos complemente A2  de M
+	    INV ACC		      	  ;Invertimos M
+	    MOV A, ACC		  	  ;Movemos el acumulador al registro A
+	    MOV ACC, 0b00000001 ;Cargamos una constante 1
+	    ADD ACC, A		  	  ;Hacemos complemente A2  de M
             MOV A, ACC          ;Vamos a almacenar - M en el registro A
             MOV ACC, VAR_A      ;Vamos al ACC y almacenamos VAR_A
             MOV DPTR, ACC       ;Vamos al DPTR y almacenamos VAR_A
@@ -108,17 +108,17 @@ Empezar_A:
             MOV ACC, 0b10000000 ;Vamos al ACC y almacenamos una constante para conservar el bit más significativo
             AND ACC, A          ;Calculamos AND entre el valor del acumulador y el registro A
             MOV A, ACC          ;Vamos al A y almacenamos el valor del acumulador
-	      	  MOV ACC, [DPTR]	    ;Vamos al ACC y almacenamos el valor del DPTR 
+	    MOV ACC, [DPTR]	    ;Vamos al ACC y almacenamos el valor del DPTR 
 Desplazar_A:
             RSH ACC, 0x1        ;Desplazamos un bit a la derecha 
             ADD ACC, A          ;Sumamos el valor que contiene el acumulador y el registro A
             MOV [DPTR], ACC     ;Vamos a VAR_A y almacenamos el valor del acumulador
 Cargamos_Count: 
-	          MOV ACC, Count 	    ;Vamos al ACC y almacenamos la variable Count
-	          MOV DPTR, ACC	      ;Vamos al apuntador y almacenamos la direacción de memoria del acumulador
-		        MOV ACC, [DPTR]	    ;Vamos al acumulador y almacenamos el valor que contiene el apuntador
-	          MOV A, ACC		      ;Vamos al registro A y almacenamos el valor del acumulador
-	          MOV ACC, 0b11111111	;Vamos al acumulador y cargamos una constante
+	    MOV ACC, Count 	    ;Vamos al ACC y almacenamos la variable Count
+	    MOV DPTR, ACC	      ;Vamos al apuntador y almacenamos la direacción de memoria del acumulador
+	    MOV ACC, [DPTR]	    ;Vamos al acumulador y almacenamos el valor que contiene el apuntador
+	    MOV A, ACC		      ;Vamos al registro A y almacenamos el valor del acumulador
+	    MOV ACC, 0b11111111	;Vamos al acumulador y cargamos una constante
             ADD ACC, A		      ;Sumamos Count y -1 
 Guardar_Count:
             MOV [DPTR], ACC     ;Vamos a Count y almacenamos el valor del acumulador
